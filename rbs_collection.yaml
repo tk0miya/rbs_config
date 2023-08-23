@@ -18,3 +18,5 @@ gems:
   # It's unnecessary if you don't use rbs as a library.
   - name: steep
     ignore: true
+
+  - name: pathname
