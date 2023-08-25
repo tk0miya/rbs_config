@@ -34,6 +34,8 @@ module RbsConfig
     def define_generate_task
       desc "Generate RBS files for config gem"
       task "#{name}:generate" do
+        require "rbs_config"  # load RbsConfig lazily
+
         signature_root_dir.mkpath
 
         signature_root_dir.join("#{class_name.underscore}.rbs").write(

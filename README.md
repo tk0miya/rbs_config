@@ -7,18 +7,12 @@ rbs_config is a RBS generator for [config gem](https://github.com/rubyconfig/con
 Add a new entry to your Gemfile and run `bundle install`:
 
     group :development do
-      gem 'rbs_config'
+      gem 'rbs_config', require: false
     end
 
 After the installation, please run rake task generator:
 
     bundle exec rails g rbs_config:install
-
-Additionally, it would be better to add the following entry to your `rbs_collection.yml`:
-
-    gems:
-        - name: rbs_config
-          ignore: true
 
 ## Usage
 
