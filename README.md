@@ -1,6 +1,11 @@
 # rbs_config
 
-rbs_config is a RBS generator for [config gem](https://github.com/rubyconfig/config).
+rbs_config is a RBS generator for Rails configuration.
+
+Now supports the following configuration:
+
+* Rails configuration (`Rails.configuration`)
+* [config gem](https://github.com/rubyconfig/config)
 
 ## Installation
 
@@ -13,6 +18,17 @@ Add a new entry to your Gemfile and run `bundle install`:
 After the installation, please run rake task generator:
 
     bundle exec rails g rbs_config:install
+
+And then, please modify `lib/tasks/rbs_config.rake` to fit your application.
+For example, set it up like this if you're using Rails configuration:
+
+    RbsConfig::RakeTask.new do |task|
+      task.type = :rails
+      task.mapping = { conf_name: Rails.application.config_for(:conf_name) }
+    end
+
+Then, rbs_config will generate RBS file for `Rails.application.conf_name` from your
+configuration file.
 
 ## Usage
 

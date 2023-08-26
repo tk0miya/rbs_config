@@ -5,16 +5,18 @@ require "rake/tasklib"
 
 module RbsConfig
   class RakeTask < Rake::TaskLib
-    attr_accessor :class_name, :files, :name, :signature_root_dir
+    attr_accessor :type, :class_name, :files, :mapping, :name, :signature_root_dir
 
     def initialize(name = :'rbs:config', &block)
       super()
 
       @name = name
+      @type = :config
       @class_name = "Settings"
       @files = [Pathname(Rails.root / "config/settings.yml"),
                 Pathname(Rails.root / "config/settings.local.yml"),
                 Pathname(Rails.root / "config/settings/production.yml")]
+      @mapping = {}
       @signature_root_dir = Pathname(Rails.root / "sig/config")
 
       block&.call(self)
@@ -38,9 +40,13 @@ module RbsConfig
 
         signature_root_dir.mkpath
 
-        signature_root_dir.join("#{class_name.underscore}.rbs").write(
-          RbsConfig::Config.generate(files: files, class_name: class_name)
-        )
+        rbs = if type == :config
+                RbsConfig::Config.generate(files: files, class_name: class_name)
+              else
+                RbsConfig::RailsConfig.generate(mapping: mapping)
+              end
+
+        signature_root_dir.join("#{class_name.underscore}.rbs").write(rbs)
       end
     end
 

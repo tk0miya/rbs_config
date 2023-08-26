@@ -1,5 +1,6 @@
 module RbsConfig
   class RakeTask < Rake::TaskLib
+    attr_accessor type: :config | :rails
     attr_accessor class_name: String
     attr_accessor files: Array[Pathname]
     attr_accessor name: Symbol
