@@ -4,7 +4,7 @@ module RbsConfig
 
     class Generator
       attr_reader class_name: String
-      attr_reader files: Array[String]
+      attr_reader files: Array[Pathname]
 
       def initialize: (class_name: String, files: Array[Pathname]) -> void
       def generate: () -> String

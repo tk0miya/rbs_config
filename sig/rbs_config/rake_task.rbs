@@ -4,6 +4,7 @@ module RbsConfig
     attr_accessor class_name: String
     attr_accessor files: Array[Pathname]
     attr_accessor name: Symbol
+    attr_accessor mapping: Hash[untyped, Hash[untyped, untyped]]
     attr_accessor signature_root_dir: Pathname
 
     def initialize: (?Symbol name) ? { (RbsConfig::RakeTask) -> void } -> void
