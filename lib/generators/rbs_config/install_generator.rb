@@ -7,7 +7,10 @@ module RbsConfig
     def create_raketask
       create_file "lib/tasks/rbs_config.rake", <<~RUBY
         begin
-          require 'rbs_config/rake_task'
+          # frozen_string_literal: true
+
+          require "rbs_config/rake_task"
+
           RbsConfig::RakeTask.new do |task|
             # The type of configuration (default: :config)
             # task.type = :config | :rails
