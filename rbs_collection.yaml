@@ -19,4 +19,8 @@ gems:
   - name: steep
     ignore: true
 
+  - name: actionpack
+  - name: actionview
   - name: pathname
+  - name: rack
+  - name: railties
