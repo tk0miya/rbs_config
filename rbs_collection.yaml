@@ -24,3 +24,4 @@ gems:
   - name: pathname
   - name: rack
   - name: railties
+  - name: thor
