@@ -41,8 +41,8 @@ GEM
       ffi (~> 1.0)
     rbs (3.2.0)
     regexp_parser (2.8.1)
-    rexml (3.2.8)
-      strscan (>= 3.0.9)
+    rexml (3.3.3)
+      strscan
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
