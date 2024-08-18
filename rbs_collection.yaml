@@ -25,3 +25,4 @@ gems:
   - name: rack
   - name: railties
   - name: thor
+  - name: yaml
