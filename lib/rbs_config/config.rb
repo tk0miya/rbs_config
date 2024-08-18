@@ -79,10 +79,11 @@ module RbsConfig
 
       def load_config(files)
         configs = files.map do |f|
+          content = ERB.new(f.read).result
           if YAML.respond_to?(:unsafe_load)
-            YAML.unsafe_load(f.read)
+            YAML.unsafe_load(content)
           else
-            YAML.load(f.read) # rubocop:disable Security/YAMLLoad
+            YAML.load(content) # rubocop:disable Security/YAMLLoad
           end
         end
         configs.inject { |a, b| a.deep_merge(b) }

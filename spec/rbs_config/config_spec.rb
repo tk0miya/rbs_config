@@ -17,7 +17,7 @@ RSpec.describe RbsConfig::Config do
     let(:config) do
       <<~YAML
         foo:
-          bar: 1
+          bar: <%= 1 %>
           baz: true
         qux:
           - lorem
