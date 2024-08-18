@@ -22,6 +22,11 @@ RSpec.describe RbsConfig::Config do
         qux:
           - lorem
           - ipsum
+        quux:
+          - lorem: 1
+            ipsum: 2
+          - lorem: 3
+            ipsum: 4
       YAML
     end
     let(:expected) do
@@ -32,8 +37,14 @@ RSpec.describe RbsConfig::Config do
             def self.baz: () -> bool
           end
 
+          class Quux
+            def self.lorem: () -> Integer
+            def self.ipsum: () -> Integer
+          end
+
           def self.foo: () -> singleton(Foo)
           def self.qux: () -> Array[String]
+          def self.quux: () -> Array[singleton(Quux)]
         end
       RBS
     end

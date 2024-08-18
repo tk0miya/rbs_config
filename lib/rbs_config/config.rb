@@ -41,17 +41,20 @@ module RbsConfig
 
       def generate_classes(config)
         config.filter_map do |key, value|
-          next unless value.is_a?(Hash)
+          case value
+          when Array
+            generate_classes({ key => value.first }).first if value.first.is_a?(Hash)
+          when Hash
+            classes = generate_classes(value)
+            methods = generate_methods(value)
 
-          classes = generate_classes(value)
-          methods = generate_methods(value)
-
-          <<~RBS
-            class #{key.camelize}
-              #{classes.join("\n")}
-              #{methods.join("\n")}
-            end
-          RBS
+            <<~RBS
+              class #{key.camelize}
+                #{classes.join("\n")}
+                #{methods.join("\n")}
+              end
+            RBS
+          end
         end
       end
 
