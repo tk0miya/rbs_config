@@ -23,10 +23,16 @@ module RbsConfig
         methods = generate_methods(config)
 
         format <<~RBS
-          class #{class_name}
-            #{classes.join("\n")}
-            #{methods.join("\n")}
+          module Config
+            module Generated
+              class #{class_name} < ::Config::Options
+                #{classes.join("\n")}
+                #{methods.join("\n")}
+              end
+            end
           end
+
+          #{class_name}: Config::Generated::#{class_name}
         RBS
       end
 
@@ -49,7 +55,7 @@ module RbsConfig
             methods = generate_methods(value)
 
             <<~RBS
-              class #{key.camelize}
+              class #{key.camelize} < ::Config::Options
                 #{classes.join("\n")}
                 #{methods.join("\n")}
               end
@@ -60,14 +66,14 @@ module RbsConfig
 
       def generate_methods(config)
         config.map do |key, value|
-          "def self.#{key}: () -> #{stringify_type(key, value)}"
+          "def #{key}: () -> #{stringify_type(key, value)}"
         end
       end
 
       def stringify_type(name, value)
         case value
         when Hash
-          "singleton(#{name.camelize})"
+          name.camelize
         when Array
           types = value.map { |v| stringify_type(name, v) }.uniq
           "Array[#{types.join(" | ")}]"

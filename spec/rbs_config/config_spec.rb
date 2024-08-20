@@ -31,21 +31,27 @@ RSpec.describe RbsConfig::Config do
     end
     let(:expected) do
       <<~RBS
-        class Settings
-          class Foo
-            def self.bar: () -> Integer
-            def self.baz: () -> bool
-          end
+        module Config
+          module Generated
+            class Settings < ::Config::Options
+              class Foo < ::Config::Options
+                def bar: () -> Integer
+                def baz: () -> bool
+              end
 
-          class Quux
-            def self.lorem: () -> Integer
-            def self.ipsum: () -> Integer
-          end
+              class Quux < ::Config::Options
+                def lorem: () -> Integer
+                def ipsum: () -> Integer
+              end
 
-          def self.foo: () -> singleton(Foo)
-          def self.qux: () -> Array[String]
-          def self.quux: () -> Array[singleton(Quux)]
+              def foo: () -> Foo
+              def qux: () -> Array[String]
+              def quux: () -> Array[Quux]
+            end
+          end
         end
+
+        Settings: Config::Generated::Settings
       RBS
     end
 
