@@ -5,9 +5,16 @@ require "rake/tasklib"
 
 module RbsConfig
   class RakeTask < Rake::TaskLib
-    attr_accessor :type, :class_name, :files, :mapping, :name, :signature_root_dir
+    attr_accessor :type #: :config | :rails
+    attr_accessor :class_name #: String
+    attr_accessor :files #: Array[Pathname]
+    attr_accessor :mapping #: Hash[untyped, Hash[untyped, untyped]]
+    attr_accessor :name #: Symbol
+    attr_accessor :signature_root_dir #: Pathname
 
-    def initialize(name = :'rbs:config', &block)
+    # @rbs name: Symbol
+    # @rbs &block: ?(RbsConfig::RakeTask) -> void
+    def initialize(name = :'rbs:config', &block) #: void
       super()
 
       @name = name
@@ -26,14 +33,14 @@ module RbsConfig
       define_setup_task
     end
 
-    def define_setup_task
+    def define_setup_task #: void
       desc "Run all tasks of rbs_config"
 
       deps = [:"#{name}:clean", :"#{name}:generate"]
       task("#{name}:setup" => deps)
     end
 
-    def define_generate_task
+    def define_generate_task #: void
       desc "Generate RBS files for config gem"
       task "#{name}:generate" do
         require "rbs_config" # load RbsConfig lazily
@@ -50,7 +57,7 @@ module RbsConfig
       end
     end
 
-    def define_clean_task
+    def define_clean_task #: void
       desc "Clean RBS files for config gem"
       task "#{name}:clean" do
         signature_root_dir.rmtree if signature_root_dir.exist?

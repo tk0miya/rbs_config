@@ -1,20 +1,38 @@
+# Generated from lib/rbs_config/config.rb with RBS::Inline
+
 module RbsConfig
   module Config
+    # @rbs files: Array[Pathname]
+    # @rbs class_name: String
     def self.generate: (files: Array[Pathname], ?class_name: String) -> String
 
     class Generator
       attr_reader class_name: String
+
       attr_reader files: Array[Pathname]
 
+      # @rbs class_name: String
+      # @rbs files: Array[Pathname]
       def initialize: (class_name: String, files: Array[Pathname]) -> void
+
       def generate: () -> String
 
       private
 
+      # @rbs rbs: String
       def format: (String rbs) -> String
+
+      # @rbs config: Hash[untyped, untyped]
       def generate_classes: (Hash[untyped, untyped] config) -> Array[String]
+
+      # @rbs config: Hash[untyped, untyped]
       def generate_methods: (Hash[untyped, untyped] config) -> Array[String]
-      def stringify_type: (untyped type, untyped value) -> String
+
+      # @rbs name: untyped
+      # @rbs value: untyped
+      def stringify_type: (untyped name, untyped value) -> String
+
+      # @rbs files: Array[Pathname]
       def load_config: (Array[Pathname] files) -> Hash[untyped, untyped]
     end
   end

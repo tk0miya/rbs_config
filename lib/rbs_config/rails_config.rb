@@ -6,18 +6,20 @@ require "active_support/core_ext/string/inflections"
 
 module RbsConfig
   module RailsConfig
-    def self.generate(mapping:)
+    # @rbs mapping: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]
+    def self.generate(mapping:) #: String
       Generator.new(mapping: mapping).generate
     end
 
     class Generator
-      attr_reader :mapping
+      attr_reader :mapping #: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]
 
-      def initialize(mapping:)
+      # @rbs mapping: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]
+      def initialize(mapping:) #: void
         @mapping = mapping
       end
 
-      def generate
+      def generate #: String
         classes = generate_classes(mapping)
         methods = mapping.map do |key, value|
           "def #{key}: () -> #{stringify_type(key, value)}"
@@ -39,14 +41,16 @@ module RbsConfig
 
       private
 
-      def format(rbs)
+      # @rbs rbs: String
+      def format(rbs) #: String
         parsed = RBS::Parser.parse_signature(rbs)
         StringIO.new.tap do |out|
           RBS::Writer.new(out: out).write(parsed[1] + parsed[2])
         end.string
       end
 
-      def generate_classes(config)
+      # @rbs config: Hash[untyped, untyped] | ActiveSupport::OrderedOptions
+      def generate_classes(config) #: Array[String]
         config.filter_map do |key, value|
           next unless value.is_a?(ActiveSupport::OrderedOptions)
 
@@ -62,7 +66,8 @@ module RbsConfig
         end
       end
 
-      def generate_methods(config)
+      # @rbs config: Hash[untyped, untyped] | ActiveSupport::OrderedOptions
+      def generate_methods(config) #: Array[String]
         case config
         when ActiveSupport::OrderedOptions
           generate_ordered_options_methods(config)
@@ -71,7 +76,8 @@ module RbsConfig
         end
       end
 
-      def generate_ordered_options_methods(config)
+      # @rbs config: ActiveSupport::OrderedOptions
+      def generate_ordered_options_methods(config) #: Array[String]
         methods = config.map do |key, value|
           type = stringify_type(key, value)
           <<~RBS
@@ -87,14 +93,17 @@ module RbsConfig
         methods + ["def []: #{brace_method_type}"]
       end
 
-      def generate_hash_methods(config)
+      # @rbs config: Hash[untyped, untyped]
+      def generate_hash_methods(config) #: Array[String]
         method_type = config.map do |key, value|
           "(:#{key} | \"#{key}\") -> #{stringify_type(key, value)}"
         end.join(" | ")
         ["def []: #{method_type}"]
       end
 
-      def stringify_type(name, value) # rubocop:disable Metrics/CyclomaticComplexity
+      # @rbs name: untyped
+      # @rbs value: untyped
+      def stringify_type(name, value) #: String # rubocop:disable Metrics/CyclomaticComplexity
         case value
         when ActiveSupport::OrderedOptions
           name.to_s.camelize

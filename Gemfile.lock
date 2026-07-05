@@ -60,6 +60,9 @@ GEM
       logger
       prism (>= 1.6.0)
       tsort
+    rbs-inline (0.14.0)
+      prism (>= 0.29)
+      rbs (~> 4.0)
     regexp_parser (2.12.0)
     rspec (3.13.2)
       rspec-core (~> 3.13.0)
@@ -127,6 +130,7 @@ PLATFORMS
 
 DEPENDENCIES
   rake (~> 13.4)
+  rbs-inline
   rbs_config!
   rspec
   rspec-daemon
