@@ -85,7 +85,7 @@ module RbsConfig
         when Hash
           name.camelize
         when Array
-          types = value.map { |v| stringify_type(name, v) }.uniq
+          types = value.map { stringify_type(name, _1) }.uniq
           "Array[#{types.join(" | ")}]"
         when NilClass
           "nil"

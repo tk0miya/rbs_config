@@ -103,7 +103,7 @@ module RbsConfig
 
       # @rbs name: untyped
       # @rbs value: untyped
-      def stringify_type(name, value) #: String # rubocop:disable Metrics/CyclomaticComplexity
+      def stringify_type(name, value) #: String
         case value
         when ActiveSupport::OrderedOptions
           name.to_s.camelize
@@ -113,7 +113,7 @@ module RbsConfig
           end
           "{ #{pairs.join(", ")} }"
         when Array
-          types = value.map { |v| stringify_type(name, v) }.uniq
+          types = value.map { stringify_type(name, _1) }.uniq
           "Array[#{types.join(" | ")}]"
         when NilClass
           "nil"
