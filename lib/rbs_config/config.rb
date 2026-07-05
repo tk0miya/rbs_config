@@ -5,19 +5,24 @@ require "active_support/core_ext/string/inflections"
 
 module RbsConfig
   module Config
-    def self.generate(files:, class_name: "Settings")
+    # @rbs files: Array[Pathname]
+    # @rbs class_name: String
+    def self.generate(files:, class_name: "Settings") #: String
       Generator.new(class_name: class_name, files: files).generate
     end
 
     class Generator
-      attr_reader :class_name, :files
+      attr_reader :class_name #: String
+      attr_reader :files #: Array[Pathname]
 
-      def initialize(class_name:, files:)
+      # @rbs class_name: String
+      # @rbs files: Array[Pathname]
+      def initialize(class_name:, files:) #: void
         @class_name = class_name
         @files = files
       end
 
-      def generate
+      def generate #: String
         config = load_config(files)
         classes = generate_classes(config)
         methods = generate_methods(config)
@@ -38,14 +43,16 @@ module RbsConfig
 
       private
 
-      def format(rbs)
+      # @rbs rbs: String
+      def format(rbs) #: String
         parsed = RBS::Parser.parse_signature(rbs)
         StringIO.new.tap do |out|
           RBS::Writer.new(out: out).write(parsed[1] + parsed[2])
         end.string
       end
 
-      def generate_classes(config)
+      # @rbs config: Hash[untyped, untyped]
+      def generate_classes(config) #: Array[String]
         config.filter_map do |key, value|
           case value
           when Array
@@ -64,13 +71,16 @@ module RbsConfig
         end
       end
 
-      def generate_methods(config)
+      # @rbs config: Hash[untyped, untyped]
+      def generate_methods(config) #: Array[String]
         config.map do |key, value|
           "def #{key}: () -> #{stringify_type(key, value)}"
         end
       end
 
-      def stringify_type(name, value)
+      # @rbs name: untyped
+      # @rbs value: untyped
+      def stringify_type(name, value) #: String
         case value
         when Hash
           name.camelize
@@ -86,7 +96,8 @@ module RbsConfig
         end
       end
 
-      def load_config(files)
+      # @rbs files: Array[Pathname]
+      def load_config(files) #: Hash[untyped, untyped]
         configs = files.map do |f|
           content = ERB.new(f.read).result
           YAML.unsafe_load(content)

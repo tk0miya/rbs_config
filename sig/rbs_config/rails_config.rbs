@@ -1,20 +1,37 @@
+# Generated from lib/rbs_config/rails_config.rb with RBS::Inline
+
 module RbsConfig
   module RailsConfig
+    # @rbs mapping: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]
     def self.generate: (mapping: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]) -> String
 
     class Generator
       attr_reader mapping: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]
 
+      # @rbs mapping: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]
       def initialize: (mapping: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]) -> void
+
       def generate: () -> String
 
       private
 
+      # @rbs rbs: String
       def format: (String rbs) -> String
+
+      # @rbs config: Hash[untyped, untyped] | ActiveSupport::OrderedOptions
       def generate_classes: (Hash[untyped, untyped] | ActiveSupport::OrderedOptions config) -> Array[String]
-      def generate_methods: (Hash[untyped, untyped] | ActiveSupport::OrderedOptions config) -> Array[string]
-      def generate_ordered_options_methods: (ActiveSupport::OrderedOptions config) -> Array[string]
-      def generate_hash_methods: (Hash[untyped, untyped]) -> Array[string]
+
+      # @rbs config: Hash[untyped, untyped] | ActiveSupport::OrderedOptions
+      def generate_methods: (Hash[untyped, untyped] | ActiveSupport::OrderedOptions config) -> Array[String]
+
+      # @rbs config: ActiveSupport::OrderedOptions
+      def generate_ordered_options_methods: (ActiveSupport::OrderedOptions config) -> Array[String]
+
+      # @rbs config: Hash[untyped, untyped]
+      def generate_hash_methods: (Hash[untyped, untyped] config) -> Array[String]
+
+      # @rbs name: untyped
+      # @rbs value: untyped
       def stringify_type: (untyped name, untyped value) -> String
     end
   end
