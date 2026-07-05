@@ -5,7 +5,7 @@ require "tempfile"
 
 RSpec.describe RbsConfig::Config do
   describe ".generate" do
-    subject { described_class.generate(files: files) }
+    subject { described_class.generate(files:) }
 
     let(:files) { [Pathname.new(config_file.path)] }
     let(:config_file) do

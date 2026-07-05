@@ -8,7 +8,7 @@ module RbsConfig
     # @rbs files: Array[Pathname]
     # @rbs class_name: String
     def self.generate(files:, class_name: "Settings") #: String
-      Generator.new(class_name: class_name, files: files).generate
+      Generator.new(class_name:, files:).generate
     end
 
     class Generator
@@ -47,7 +47,7 @@ module RbsConfig
       def format(rbs) #: String
         parsed = RBS::Parser.parse_signature(rbs)
         StringIO.new.tap do |out|
-          RBS::Writer.new(out: out).write(parsed[1] + parsed[2])
+          RBS::Writer.new(out:).write(parsed[1] + parsed[2])
         end.string
       end
 

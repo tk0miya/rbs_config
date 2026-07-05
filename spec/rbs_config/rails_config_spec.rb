@@ -5,7 +5,7 @@ require "tempfile"
 
 RSpec.describe RbsConfig::RailsConfig do
   describe ".generate" do
-    subject { described_class.generate(mapping: mapping) }
+    subject { described_class.generate(mapping:) }
 
     let(:mapping) do
       {

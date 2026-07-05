@@ -8,7 +8,7 @@ module RbsConfig
   module RailsConfig
     # @rbs mapping: Hash[untyped, Hash[untyped, untyped] | ActiveSupport::OrderedOptions]
     def self.generate(mapping:) #: String
-      Generator.new(mapping: mapping).generate
+      Generator.new(mapping:).generate
     end
 
     class Generator
@@ -45,7 +45,7 @@ module RbsConfig
       def format(rbs) #: String
         parsed = RBS::Parser.parse_signature(rbs)
         StringIO.new.tap do |out|
-          RBS::Writer.new(out: out).write(parsed[1] + parsed[2])
+          RBS::Writer.new(out:).write(parsed[1] + parsed[2])
         end.string
       end
 
