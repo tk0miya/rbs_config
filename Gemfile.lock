@@ -100,6 +100,10 @@ GEM
     rubocop-rake (0.7.1)
       lint_roller (~> 1.1)
       rubocop (>= 1.72.1)
+    rubocop-rbs_inline (1.5.5)
+      lint_roller (~> 1.1)
+      rbs-inline
+      rubocop (>= 1.72.1, < 2.0)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
     steep (2.0.0)
@@ -145,6 +149,7 @@ DEPENDENCIES
   rubocop (~> 1.88)
   rubocop-numbered-params
   rubocop-rake
+  rubocop-rbs_inline
   steep
 
 BUNDLED WITH
