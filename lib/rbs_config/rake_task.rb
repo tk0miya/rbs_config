@@ -14,7 +14,7 @@ module RbsConfig
 
     # @rbs name: Symbol
     # @rbs &block: ?(RbsConfig::RakeTask) -> void
-    def initialize(name = :'rbs:config', &block) #: void
+    def initialize(name = :"rbs:config", &block) #: void
       super()
 
       @name = name
@@ -48,9 +48,9 @@ module RbsConfig
         signature_root_dir.mkpath
 
         rbs = if type == :config
-                RbsConfig::Config.generate(files: files, class_name: class_name)
+                RbsConfig::Config.generate(files:, class_name:)
               else
-                RbsConfig::RailsConfig.generate(mapping: mapping)
+                RbsConfig::RailsConfig.generate(mapping:)
               end
 
         signature_root_dir.join("#{class_name.underscore}.rbs").write(rbs)
