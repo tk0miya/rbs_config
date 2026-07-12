@@ -24,5 +24,6 @@ gems:
   - name: pathname
   - name: rack
   - name: railties
+  - name: strscan
   - name: thor
   - name: yaml
