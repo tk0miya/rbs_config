@@ -35,7 +35,7 @@ GEM
     fileutils (1.8.0)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
-    json (2.21.2)
+    json (3.0.2)
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
     listen (3.10.0)
@@ -46,7 +46,7 @@ GEM
     minitest (6.0.6)
       drb (~> 2.0)
       prism (~> 1.5)
-    parallel (2.1.0)
+    parallel (2.2.0)
     parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
@@ -80,7 +80,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.6)
-    rubocop (1.90.0)
+    rubocop (1.91.0)
       json (>= 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -157,7 +157,7 @@ DEPENDENCIES
   rbs_config!
   rspec
   rspec-daemon
-  rubocop (~> 1.90)
+  rubocop (~> 1.91)
   rubocop-instance_variable_access
   rubocop-numbered-params
   rubocop-rake
