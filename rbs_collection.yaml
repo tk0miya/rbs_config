@@ -20,5 +20,4 @@ gems:
     ignore: true
 
   - name: pathname
-  - name: strscan
   - name: yaml
