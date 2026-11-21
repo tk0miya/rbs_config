@@ -2,6 +2,7 @@
 
 require "rbs"
 require "active_support/core_ext/string/inflections"
+require "erb"
 require "yaml"
 
 module RbsConfig
